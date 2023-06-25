@@ -1,31 +1,26 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritePhotoLocalData {
-  static const key = 'items';
-  int favLength;
-  FavoritePhotoLocalData([this.favLength = 0]);
+  static const String key = 'items';
+  int faforiteLength;
+  FavoritePhotoLocalData([this.faforiteLength = 0]);
 
   Future<void> addFavorite(imageUrl) async {
     var prefs = await SharedPreferences.getInstance();
-    List<String> faforitePhoto = await getFavorite() as List<String>;
-
+    List<String> faforitePhoto = await getFavorite();
+    bool isConstains = faforitePhoto.contains(imageUrl);
+    if (isConstains) {
+      return;
+    }
     faforitePhoto.add(imageUrl);
     await prefs.setStringList(key, faforitePhoto);
   }
 
-  Future getFavorite() async {
+  Future<List<String>> getFavorite() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> faforitePhoto = prefs.getStringList(key) ?? [];
-    favLength = faforitePhoto.length;
-
+    faforiteLength = faforitePhoto.length;
     return faforitePhoto;
-  }
-
-  Future getFavoriteLength() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int faforitePhotoLength = prefs.getStringList(key) as int;
-
-    return faforitePhotoLength;
   }
 
   Future clearFavorite() async {

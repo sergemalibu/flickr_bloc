@@ -1,7 +1,8 @@
+import 'package:flickr/pages/favorite/bloc/favorite_bloc.dart';
 import 'package:flickr/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'search_bloc/search_bloc.dart';
+import 'pages/search/bloc/photo_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PhotoBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FavoriteBloc(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

@@ -1,8 +1,12 @@
-import 'package:flickr/pages/search_page.dart';
+import 'package:flickr/pages/search/view/search_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  static const String _textMain = 'Поиск изображений';
+  static const String _imageAsset = 'assets/flickr.png';
+  static const String _text = 'Можно найти все';
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +14,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
-          'Поиск изображений',
+          _textMain,
         ),
         actions: [
           IconButton(
@@ -30,12 +34,10 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/flickr.png'),
-            const SizedBox(
-              height: 50,
-            ),
+            Image.asset(_imageAsset),
+            const SizedBox(height: 30),
             const Text(
-              'Можно найти все',
+              _text,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
